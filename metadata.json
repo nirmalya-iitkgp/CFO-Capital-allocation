@@ -1,0 +1,6 @@
+{
+  "name": "Meridian Capital",
+  "description": "Dynamic Capital Allocation & Portfolio Optimization Engine for GE-McKinsey 9-Box Matrix and McKinsey Three Horizons modeling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
