@@ -41,6 +41,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAddModal }) => {
             ROI Projections
           </a>
           <a
+            href="#dupont-workbench"
+            className="hover:text-[#F8FAFC] hover:underline underline-offset-8 decoration-[#06B6D4] transition-colors whitespace-nowrap shrink-0"
+          >
+            DuPont &amp; EVA
+          </a>
+          <a
             href="#portfolio-ledger"
             className="hover:text-[#F8FAFC] hover:underline underline-offset-8 decoration-[#06B6D4] transition-colors whitespace-nowrap shrink-0"
           >

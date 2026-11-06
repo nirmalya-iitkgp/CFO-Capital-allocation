@@ -106,3 +106,49 @@ export interface PortfolioSimulationResult {
   projections: YearlyProjection[];
   summary: PortfolioSummary;
 }
+
+export interface DupontParams {
+  /** Base revenue in $M (can sync with portfolio totalRevenue) */
+  revenue: number;
+  /** Operating margin (EBIT / Revenue) in % */
+  ebitMargin: number;
+  /** Effective corporate tax rate in % */
+  taxRate: number;
+  /** Pre-tax cost of debt in % */
+  costOfDebt: number;
+  /** Asset turnover (Revenue / Total Assets) in x */
+  assetTurnover: number;
+  /** Equity multiplier (Total Assets / Shareholders' Equity) in x */
+  equityMultiplier: number;
+}
+
+export interface DupontDriverSensitivity {
+  driver: string;
+  currentValue: string;
+  roeImpactBps: number;
+}
+
+export interface DupontAnalysisResult {
+  taxBurden: number;
+  interestBurden: number;
+  ebitMarginPct: number;
+  assetTurnover: number;
+  equityMultiplier: number;
+  netProfitMarginPct: number;
+  roaPct: number;
+  roePct: number;
+  totalAssets: number;
+  shareholdersEquity: number;
+  totalDebt: number;
+  debtToEquity: number;
+  ebit: number;
+  interestExpense: number;
+  ebt: number;
+  netIncome: number;
+  nopat: number;
+  roicPct: number;
+  eva: number;
+  evaSpreadPct: number;
+  sensitivities: DupontDriverSensitivity[];
+}
+

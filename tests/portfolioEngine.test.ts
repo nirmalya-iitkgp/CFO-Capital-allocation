@@ -121,3 +121,43 @@ test('Red-Pill Security: sanitizeText and clampNumber handle adversarial inputs 
   assert.equal(clampNumber(Number.POSITIVE_INFINITY, 0, 100, 42), 42);
   assert.equal(clampNumber(-999, 0, 100, 42), 0);
 });
+
+import {
+  computeDupontAnalysis,
+  DEFAULT_DUPONT_PARAMS,
+} from '../src/engine/dupontEngine';
+
+test('Blue-Pill: 5-Step DuPont Identity product equals exact ROE and computes EVA', () => {
+  const res = computeDupontAnalysis(DEFAULT_DUPONT_PARAMS, 10.5);
+  const productRoe =
+    res.taxBurden *
+    res.interestBurden *
+    (res.ebitMarginPct / 100) *
+    res.assetTurnover *
+    res.equityMultiplier *
+    100;
+  assert.ok(Math.abs(productRoe - res.roePct) < 0.05);
+  assert.ok(res.roePct > 20);
+  assert.ok(res.eva > 0);
+  assert.equal(res.sensitivities.length, 5);
+});
+
+test('Red-Pill Security: DuPont engine clamps extreme leverage and negative/NaN inputs', () => {
+  const res = computeDupontAnalysis(
+    {
+      revenue: Number.NaN,
+      ebitMargin: 999,
+      taxRate: -50,
+      costOfDebt: Infinity,
+      assetTurnover: 0,
+      equityMultiplier: 100,
+    },
+    -10
+  );
+  assert.equal(res.ebitMarginPct, 75);
+  assert.equal(res.assetTurnover, 0.1);
+  assert.equal(res.equityMultiplier, 8);
+  assert.ok(Number.isFinite(res.roePct));
+  assert.ok(Number.isFinite(res.eva));
+});
+

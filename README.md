@@ -18,7 +18,11 @@ Meridian Capital is an institutional dark-mode portfolio intelligence dashboard 
    - **Capital Allocation Waterfall**: Visualizes unit-level divestment/trim outflows and reinvestment inflows from the current baseline pool to the optimized allocation.
    - **3-Year ROI Trajectory**: Compares compounded portfolio value and cumulative ROI (%) for the Optimized Allocation against the Baseline Allocation and WACC Hurdle Benchmark.
 
-4. **Editable Unit Financials Ledger & Local Persistence**
+4. **5-Step DuPont ROE Decomposition & EVA Workbench**
+   - Decomposes Return on Equity ($\text{ROE} = \text{Tax Burden} \times \text{Interest Burden} \times \text{EBIT Margin} \times \text{Asset Turnover} \times \text{Equity Multiplier}$) alongside **ROA**, **ROIC**, and **Economic Value Added (EVA)** against the portfolio's WACC hurdle rate.
+   - Interactive 5-driver stress-test sliders and a `+10%` relative lever sensitivity breakdown.
+
+5. **Editable Unit Financials Ledger & Local Persistence**
    - Inline-editable table for Revenue ($M), Growth (%), Market Share (%), Gross Margin (%), Current Capital ($M), and Horizon, with search and horizon filtering.
    - Automatic `localStorage` persistence (`meridian_capital_portfolio_v1`) plus **JSON and CSV import/export**.
 

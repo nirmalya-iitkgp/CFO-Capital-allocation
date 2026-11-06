@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { AddUnitModal } from './components/AddUnitModal';
+import { DupontWorkbench } from './components/DupontWorkbench';
 import { Header } from './components/Header';
 import { HorizonsSimulator } from './components/HorizonsSimulator';
 import { MatrixGrid } from './components/MatrixGrid';
@@ -8,8 +9,10 @@ import { PortfolioToolbar } from './components/PortfolioToolbar';
 import { RoiTrajectoryChart } from './components/RoiTrajectoryChart';
 import { WaterfallChart } from './components/WaterfallChart';
 import { PORTFOLIO_PRESETS } from './data/presets';
+import { DEFAULT_DUPONT_PARAMS } from './engine/dupontEngine';
 import { runPortfolioSimulation } from './engine/portfolioEngine';
 import {
+  DupontParams,
   MatrixCellCoord,
   ProductUnit,
   SimulationParams,
@@ -62,6 +65,9 @@ export default function App() {
   const [presetId, setPresetId] = useState<string>(initial.presetId);
   const [units, setUnits] = useState<ProductUnit[]>(initial.units);
   const [params, setParams] = useState<SimulationParams>(initial.params);
+  const [dupontParams, setDupontParams] = useState<DupontParams>(
+    DEFAULT_DUPONT_PARAMS
+  );
   const [selectedUnitId, setSelectedUnitId] = useState<string | null>(
     initial.units[0]?.id ?? null
   );
@@ -277,6 +283,14 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        {/* Dynamic 5-Step DuPont ROE Decomposition & EVA Workbench */}
+        <DupontWorkbench
+          params={dupontParams}
+          portfolioRevenue={simulation.summary.totalRevenue}
+          waccRate={params.waccRate}
+          onChangeParams={setDupontParams}
+        />
 
         {/* Full-Width Editable Unit Financials Ledger */}
         <PortfolioLedger
